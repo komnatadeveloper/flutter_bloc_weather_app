@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_bloc_weather_app/cubit/weather_cubit.dart';
+// Cubit
+// import 'package:flutter_bloc_weather_app/cubit/weather_cubit.dart';
+// Bloc
+import 'package:flutter_bloc_weather_app/bloc/weather_bloc.dart';
+// from data folder
 import '../data/model/weather.dart';
 
 class WeatherSearchScreen extends StatefulWidget {
@@ -22,7 +26,7 @@ class _WeatherSearchScreenState extends State<WeatherSearchScreen> {
         // child: buildInitialInput(),
         // child: BlocBuilder<WeatherCubit, WeatherState>(
         //   cubit: BlocProvider.of<WeatherCubit>(context), // ALSO POSSIBLE
-        child: BlocConsumer<WeatherCubit, WeatherState>(
+        child: BlocConsumer<WeatherBloc, WeatherState>(
           listener: (  context, state ) {
             if ( state is WeatherError ) {
               Scaffold.of(context).showSnackBar(
@@ -105,8 +109,10 @@ class CityInputField extends StatelessWidget {
 
     // BlocProvider.of(context)  // This is also a way to use BLOC but old fashion
 
-    final weatherCubit =  context.bloc<WeatherCubit>();
-    weatherCubit.getWeather(cityName);
+    final weatherBloc =  context.bloc<WeatherBloc>();
+    weatherBloc.add(
+      GetWeather(cityName)
+    );
 
   }
 }

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc_weather_app/bloc/weather_bloc.dart';
 import 'package:flutter_bloc_weather_app/cubit/weather_cubit.dart';
 import 'package:flutter_bloc_weather_app/data/weather_repository.dart';
 // Screens
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       //   visualDensity: VisualDensity.adaptivePlatformDensity,
       // ),
       home: BlocProvider(
-        create: ( context ) => WeatherCubit(
+        // create: ( context ) => WeatherCubit(  // for Cubit
+        create: ( context ) => WeatherBloc(
           FakeWeatherRepository()
         ),
         child: WeatherSearchScreen()
